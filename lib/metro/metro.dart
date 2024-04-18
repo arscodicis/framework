@@ -957,8 +957,17 @@ _makeModel(List<String> arguments) async {
   if (hasJsonFlag) {
     final fileName = 'nylo-model.json';
 
-    MetroConsole.writeInGreen(
-        'Input your text and press Ctrl + D to save and exit.');
+    String? consoleMessage;
+    if (Platform.isMacOS || Platform.isLinux) {
+      consoleMessage = 'Input your text and press Ctrl + D to save and exit.';
+    }
+    if (Platform.isWindows) {
+      consoleMessage = 'Input your text and press Ctrl + C to save and exit.';
+    }
+
+    if (consoleMessage != null) {
+      MetroConsole.writeInGreen(consoleMessage);
+    }
 
     // Read user input from stdin
     final StringBuffer buffer = StringBuffer();
