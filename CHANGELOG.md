@@ -1,3 +1,7 @@
+## [5.25.4] - 2024-04-20
+
+* Update pubspec.yaml
+
 ## [5.25.3] - 2024-04-18
 
 * Update metro make:model --json command to check if cli is running on Windows or MacOS 
