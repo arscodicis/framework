@@ -1077,6 +1077,7 @@ _makePage(List<String> arguments) async {
   if (argResults[initialPageFlag]) {
     initialPage = true;
   }
+
   bool authPage = false;
   if (argResults[authPageFlag]) {
     authPage = true;
@@ -1119,8 +1120,52 @@ _makePage(List<String> arguments) async {
     return;
   }
 
-  MetroProjectFile projectFile = MetroService.createMetroProjectFile(
-      argResults.arguments.first,
+  String firstArg = argResults.arguments.first;
+  if (firstArg.contains(",")) {
+    List<String> pages = firstArg.split(",");
+    for (var page in pages) {
+      MetroProjectFile projectFile = MetroService.createMetroProjectFile(page,
+          prefix: RegExp(r'(_?page)'));
+
+      if (shouldCreateController) {
+        String stubPageAndController = pageWithControllerStub(
+            className: projectFile.name,
+            creationPath: projectFile.creationPath);
+        await MetroService.makePage(
+          projectFile.name,
+          stubPageAndController,
+          forceCreate: hasForceFlag ?? false,
+          addToRoute: true,
+          isInitialPage: initialPage,
+          isAuthPage: authPage,
+          creationPath: projectFile.creationPath,
+        );
+
+        String stubController =
+            controllerStub(controllerName: projectFile.name);
+        await MetroService.makeController(
+          projectFile.name,
+          stubController,
+          forceCreate: hasForceFlag ?? false,
+          creationPath: projectFile.creationPath,
+        );
+      } else {
+        String stubPage = pageStub(className: projectFile.name);
+        await MetroService.makePage(
+          projectFile.name,
+          stubPage,
+          forceCreate: hasForceFlag ?? false,
+          addToRoute: true,
+          isInitialPage: initialPage,
+          isAuthPage: authPage,
+          creationPath: projectFile.creationPath,
+        );
+      }
+    }
+    return;
+  }
+
+  MetroProjectFile projectFile = MetroService.createMetroProjectFile(firstArg,
       prefix: RegExp(r'(_?page)'));
 
   if (shouldCreateController) {
