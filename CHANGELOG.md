@@ -1,3 +1,7 @@
+## [5.26.1] - 2024-04-28
+
+* Update pubspec.yaml
+
 ## [5.26.0] - 2024-04-25
 
 * Ability create multiple pages at once using Metro. E.g. `metro make:page home,dashboard,settings` // this will create 3 pages home_page, dashboard_page and settings_page
