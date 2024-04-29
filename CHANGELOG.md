@@ -1,3 +1,7 @@
+## [5.26.2] - 2024-04-29
+
+* Fix `interceptor` stub
+
 ## [5.26.1] - 2024-04-28
 
 * Update pubspec.yaml

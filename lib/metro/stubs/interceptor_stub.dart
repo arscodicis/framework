@@ -17,7 +17,7 @@ class ${interceptorName.pascalCase}Interceptor extends Interceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    handler.next(dioException);
+    handler.next(err);
   }
 }
 ''';
