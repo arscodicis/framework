@@ -41,8 +41,9 @@ export 'package:nylo_support/widgets/ny_page.dart';
 export 'package:nylo_support/widgets/ny_language_switcher.dart';
 export 'package:nylo_support/networking/ny_api_service.dart';
 export 'package:nylo_support/networking/ny_base_api_service.dart';
+export 'package:error_stack/error_stack.dart';
 export 'package:skeletonizer/skeletonizer.dart';
 export 'package:dio/dio.dart';
 
 /// Nylo version
-const String nyloVersion = 'v5.26.2';
+const String nyloVersion = 'v5.27.0';

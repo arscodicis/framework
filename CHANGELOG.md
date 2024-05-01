@@ -1,3 +1,7 @@
+## [5.27.0] - 2024-05-01
+
+* Add `error_stack` to framework
+
 ## [5.26.2] - 2024-04-29
 
 * Fix `interceptor` stub
