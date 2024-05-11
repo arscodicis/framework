@@ -44,6 +44,7 @@ export 'package:nylo_support/networking/ny_base_api_service.dart';
 export 'package:error_stack/error_stack.dart';
 export 'package:skeletonizer/skeletonizer.dart';
 export 'package:dio/dio.dart';
+export 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 /// Nylo version
-const String nyloVersion = 'v5.27.1';
+const String nyloVersion = 'v5.27.2';
