@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:args/args.dart';
-import 'package:cli_dialog/cli_dialog.dart';
+import 'package:nylo_framework/cli_dialog/cli_dialog.dart';
 import 'package:nylo_framework/json_dart_generator/dart_code_generator.dart';
 import 'package:nylo_framework/metro/stubs/config_stub.dart';
 import 'package:nylo_framework/metro/stubs/interceptor_stub.dart';

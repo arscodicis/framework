@@ -1,3 +1,8 @@
+## [5.27.4] - 2024-05-14
+
+* Update pubspec.yaml
+* Add `dart_console`
+
 ## [5.27.3] - 2024-05-12
 
 * Downgrade `flutter_secure_storage` to ^9.0.0
