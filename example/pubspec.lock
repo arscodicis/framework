@@ -85,10 +85,10 @@ packages:
     dependency: transitive
     description:
       name: error_stack
-      sha256: ade94b3bb741b1f5bddc60a1d47d7fd6d01e70309b7c0d3f15bdc5e2fa7dde99
+      sha256: "76fea2b3cbf7470ca2f87de851591f910d3b007a5be78824a92e988dbd431c87"
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.4"
+    version: "1.4.0"
   fake_async:
     dependency: transitive
     description:
@@ -291,15 +291,15 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "5.27.6"
+    version: "5.28.0"
   nylo_support:
     dependency: transitive
     description:
       name: nylo_support
-      sha256: "4aadd17cc4e8b6ac8d15631c535279beb8036526bd70ded6af6d4b3e4e414e3a"
+      sha256: ceb9dab1df97cb75bd0e0d48211413852b81ba146cdb48ee57b757b650127f92
       url: "https://pub.dev"
     source: hosted
-    version: "5.69.5"
+    version: "5.70.0"
   page_transition:
     dependency: transitive
     description:
@@ -376,10 +376,10 @@ packages:
     dependency: transitive
     description:
       name: plugin_platform_interface
-      sha256: "43798d895c929056255600343db8f049921cbec94d31ec87f1dc5c16c01935dd"
+      sha256: "4820fbfdb9478b1ebae27888254d445073732dae3d6ea81f0b7e06d5dedc3f02"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.5"
+    version: "2.1.8"
   pretty_dio_logger:
     dependency: transitive
     description:
@@ -472,10 +472,10 @@ packages:
     dependency: transitive
     description:
       name: skeletonizer
-      sha256: "50c3fdf3d1bf6182129c03b53bc7ff6dca10ca0b8e71ccdee148b9322caabdba"
+      sha256: d94ae24d9fcedc5fd2984ccbe5af5e9d76e2bf6a35ee775fe8c737c90297908e
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.2+1"
+    version: "1.3.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -549,18 +549,18 @@ packages:
     dependency: transitive
     description:
       name: url_launcher
-      sha256: "6ce1e04375be4eed30548f10a315826fd933c1e493206eab82eed01f438c8d2e"
+      sha256: "21b704ce5fa560ea9f3b525b43601c678728ba46725bab9b01187b4831377ed3"
       url: "https://pub.dev"
     source: hosted
-    version: "6.2.6"
+    version: "6.3.0"
   url_launcher_android:
     dependency: transitive
     description:
       name: url_launcher_android
-      sha256: "507dc655b1d9cb5ebc756032eb785f114e415f91557b73bf60b7e201dfedeb2f"
+      sha256: ceb2625f0c24ade6ef6778d1de0b2e44f2db71fded235eb52295247feba8c5cf
       url: "https://pub.dev"
     source: hosted
-    version: "6.2.2"
+    version: "6.3.3"
   url_launcher_ios:
     dependency: transitive
     description:
@@ -589,10 +589,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_platform_interface
-      sha256: "4aca1e060978e19b2998ee28503f40b5ba6226819c2b5e3e4d1821e8ccd92198"
+      sha256: "552f8a1e663569be95a8190206a38187b531910283c3e982193e4f2733f01029"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.0"
+    version: "2.3.2"
   url_launcher_web:
     dependency: transitive
     description:
@@ -658,5 +658,5 @@ packages:
     source: hosted
     version: "1.0.2"
 sdks:
-  dart: ">=3.3.3 <4.0.0"
-  flutter: ">=3.19.0"
+  dart: ">=3.4.0 <4.0.0"
+  flutter: ">=3.22.0"

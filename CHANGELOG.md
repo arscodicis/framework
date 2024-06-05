@@ -1,3 +1,8 @@
+## [5.28.0] - 2024-06-05
+
+* Remove the ability to use a "postman.json" file in the `_makeApiService` command
+* Update pubspec.yaml
+
 ## [5.27.6] - 2024-05-22
 
 * Update pubspec.yaml

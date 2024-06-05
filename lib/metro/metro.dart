@@ -458,27 +458,6 @@ _makeApiService(List<String> arguments) async {
       });
 
       postmanGlobalVars = newObj;
-    } else {
-      // get root postman contents
-      File filePostman = File("postman.json");
-      if ((await filePostman.exists()) == false) {
-        MetroConsole.writeInBlack(
-            "Your project is missing a 'postman.json' file. E.g.\n" +
-                '''
-  {
-    "global": {
-      "BASE_URL": "https://nylo.dev",
-      "API_VERSION": "v2",
-    }
-  }
-  ''' +
-                "Create the file at the root of the project.");
-        exit(1);
-      }
-      String jsonFilePostman = await filePostman.readAsString();
-      Map<String, dynamic> postmanFileContents =
-          Map<String, dynamic>.from(jsonDecode(jsonFilePostman));
-      postmanGlobalVars = postmanFileContents['global'];
     }
 
     await _makePostmanApiService(
