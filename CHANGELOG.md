@@ -1,3 +1,7 @@
+## [5.28.1] - 2024-06-05
+
+* Dart format
+
 ## [5.28.0] - 2024-06-05
 
 * Remove the ability to use a "postman.json" file in the `_makeApiService` command
