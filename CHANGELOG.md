@@ -1,3 +1,7 @@
+## [5.28.2] - 2024-06-06
+
+* Update pubspec.yaml
+
 ## [5.28.1] - 2024-06-05
 
 * Dart format
