@@ -149,8 +149,8 @@ _makeConfig(List<String> arguments) async {
   MetroService.checkArguments(arguments,
       'You are missing the \'name\' of the config file that you want to create.\ne.g. make:config settings');
 
-  String configName =
-      argResults.arguments.first.replaceAll(RegExp(r'(_?config)'), "");
+  String configName = argResults.arguments.first.snakeCase
+      .replaceAll(RegExp(r'(_?config)'), "");
 
   ReCase classReCase = ReCase(configName);
 
@@ -180,8 +180,8 @@ _makeStatefulWidget(List<String> arguments) async {
   MetroService.checkArguments(arguments,
       'You are missing the \'name\' of the stateful widget that you want to create.\ne.g. make:stateful_widget my_new_widget');
 
-  String widgetName =
-      argResults.arguments.first.replaceAll(RegExp(r'(_?widget)'), "");
+  String widgetName = argResults.arguments.first.snakeCase
+      .replaceAll(RegExp(r'(_?widget)'), "");
 
   ReCase classReCase = ReCase(widgetName);
 
@@ -212,8 +212,8 @@ _makeStatelessWidget(List<String> arguments) async {
   MetroService.checkArguments(arguments,
       'You are missing the \'name\' of the widget that you want to create.\ne.g. make:stateless_widget my_new_widget');
 
-  String widgetName =
-      argResults.arguments.first.replaceAll(RegExp(r'(_?widget)'), "");
+  String widgetName = argResults.arguments.first.snakeCase
+      .replaceAll(RegExp(r'(_?widget)'), "");
   ReCase classReCase = ReCase(widgetName);
 
   String stubStatelessWidget = widgetStatelessStub(classReCase);
@@ -243,8 +243,8 @@ _makeRouteGuard(List<String> arguments) async {
   MetroService.checkArguments(arguments,
       'You are missing the \'name\' of the widget that you want to create.\ne.g. make:route_guard subscription_route_guard');
 
-  String className =
-      argResults.arguments.first.replaceAll(RegExp(r'(_?route_guard)'), "");
+  String className = argResults.arguments.first.snakeCase
+      .replaceAll(RegExp(r'(_?route_guard)'), "");
   ReCase classReCase = ReCase(className);
 
   String routeGuard = routeGuardStub(classReCase);
@@ -271,8 +271,8 @@ _makeProvider(List<String> arguments) async {
   MetroService.checkArguments(arguments,
       'You are missing the \'name\' of the provider that you want to create.\ne.g. make:provider cache_provider');
 
-  String providerName =
-      argResults.arguments.first.replaceAll(RegExp(r'(_?provider)'), "");
+  String providerName = argResults.arguments.first.snakeCase
+      .replaceAll(RegExp(r'(_?provider)'), "");
   ReCase classReCase = ReCase(providerName);
 
   String stubProvider = providerStub(classReCase);
@@ -300,7 +300,7 @@ _makeEvent(List<String> arguments) async {
       'You are missing the \'name\' of the event that you want to create.\ne.g. make:event login_event');
 
   String eventName =
-      argResults.arguments.first.replaceAll(RegExp(r'(_?event)'), "");
+      argResults.arguments.first.snakeCase.replaceAll(RegExp(r'(_?event)'), "");
 
   ReCase classReCase = ReCase(eventName);
   String stubEvent = eventStub(eventName: classReCase);
@@ -343,8 +343,8 @@ _makeApiService(List<String> arguments) async {
   String modelFlagValue = argResults[modelFlag] ?? "Model";
   String? baseUrlFlagValue = argResults[urlFlag];
   MetroService.hasHelpFlag(argResults[helpFlag], parser.usage);
-  String apiServiceName =
-      argResults.arguments.first.replaceAll(RegExp(r'(_?api_service)'), "");
+  String apiServiceName = argResults.arguments.first.snakeCase
+      .replaceAll(RegExp(r'(_?api_service)'), "");
   ReCase classReCase = ReCase(apiServiceName);
 
   MetroService.checkArguments(arguments,
@@ -497,8 +497,8 @@ _makeInterceptor(List<String> arguments) async {
   MetroService.checkArguments(arguments,
       'You are missing the \'name\' of the interceptor that you want to create.\ne.g. make:interceptor auth_token');
 
-  String interceptorName =
-      argResults.arguments.first.replaceAll(RegExp(r'(_?interceptor)'), "");
+  String interceptorName = argResults.arguments.first.snakeCase
+      .replaceAll(RegExp(r'(_?interceptor)'), "");
 
   ReCase classReCase = ReCase(interceptorName);
   String stubInterceptor = interceptorStub(interceptorName: classReCase);
@@ -862,7 +862,7 @@ _makeTheme(List<String> arguments) async {
       'You are missing the \'name\' of the theme that you want to create.\ne.g. make:theme bright_theme');
 
   String themeName =
-      argResults.arguments.first.replaceAll(RegExp(r'(_?theme)'), "");
+      argResults.arguments.first.snakeCase.replaceAll(RegExp(r'(_?theme)'), "");
   ReCase classReCase = ReCase(themeName);
 
   String stubTheme = themeStub(classReCase, isDark: hasThemeDarkFlag ?? false);
@@ -898,7 +898,9 @@ _makeController(List<String> arguments) async {
       argResults.arguments.first,
       prefix: RegExp(r'(_?controller)'));
 
-  String stubController = controllerStub(controllerName: projectFile.name);
+  String stubController = controllerStub(
+      controllerName:
+          projectFile.name.replaceAll(RegExp(r'(_?controller)'), ""));
 
   await MetroService.makeController(projectFile.name, stubController,
       forceCreate: hasForceFlag ?? false);
@@ -973,7 +975,10 @@ _makeModel(List<String> arguments) async {
 
     stubModel = generator.generate(modelData);
   } else {
-    stubModel = modelStub(modelName: modelName);
+    stubModel = modelStub(
+        modelName: modelName.snakeCase
+            .replaceAll(RegExp(r'(_?model)'), "")
+            .pascalCase);
   }
   await _createNyloModel(projectFile.name,
       stubModel: stubModel,
@@ -1081,7 +1086,9 @@ _makePage(List<String> arguments) async {
     int bottomTabs = int.parse(dialogQuestions['bottom_tabs']);
 
     String stubBottomNavPage = pageBottomNavStub(
-        className: argResults.arguments.first, tabCount: bottomTabs);
+        className: argResults.arguments.first.snakeCase
+            .replaceAll(RegExp(r'(_?page)'), ""),
+        tabCount: bottomTabs);
 
     MetroProjectFile projectFile = MetroService.createMetroProjectFile(
         argResults.arguments.first,
@@ -1108,7 +1115,8 @@ _makePage(List<String> arguments) async {
 
       if (shouldCreateController) {
         String stubPageAndController = pageWithControllerStub(
-            className: projectFile.name,
+            className:
+                projectFile.name.snakeCase.replaceAll(RegExp(r'(_?page)'), ""),
             creationPath: projectFile.creationPath);
         await MetroService.makePage(
           projectFile.name,
@@ -1120,18 +1128,21 @@ _makePage(List<String> arguments) async {
           creationPath: projectFile.creationPath,
         );
 
-        String stubController =
-            controllerStub(controllerName: projectFile.name);
+        String stubController = controllerStub(
+            controllerName: projectFile.name.snakeCase
+                .replaceAll(RegExp(r'(_?controller)'), ""));
         await MetroService.makeController(
-          projectFile.name,
+          projectFile.name.snakeCase.replaceAll(RegExp(r'(_?controller)'), ""),
           stubController,
           forceCreate: hasForceFlag ?? false,
           creationPath: projectFile.creationPath,
         );
       } else {
-        String stubPage = pageStub(className: projectFile.name);
+        String stubPage = pageStub(
+            className:
+                projectFile.name.snakeCase.replaceAll(RegExp(r'(_?page)'), ""));
         await MetroService.makePage(
-          projectFile.name,
+          projectFile.name.snakeCase.replaceAll(RegExp(r'(_?page)'), ""),
           stubPage,
           forceCreate: hasForceFlag ?? false,
           addToRoute: true,
@@ -1151,7 +1162,7 @@ _makePage(List<String> arguments) async {
     String stubPageAndController = pageWithControllerStub(
         className: projectFile.name, creationPath: projectFile.creationPath);
     await MetroService.makePage(
-      projectFile.name,
+      projectFile.name.snakeCase.replaceAll(RegExp(r'(_?page)'), ""),
       stubPageAndController,
       forceCreate: hasForceFlag ?? false,
       addToRoute: true,
@@ -1160,17 +1171,21 @@ _makePage(List<String> arguments) async {
       creationPath: projectFile.creationPath,
     );
 
-    String stubController = controllerStub(controllerName: projectFile.name);
+    String stubController = controllerStub(
+        controllerName: projectFile.name.snakeCase
+            .replaceAll(RegExp(r'(_?controller)'), ""));
     await MetroService.makeController(
-      projectFile.name,
+      projectFile.name.snakeCase.replaceAll(RegExp(r'(_?controller)'), ""),
       stubController,
       forceCreate: hasForceFlag ?? false,
       creationPath: projectFile.creationPath,
     );
   } else {
-    String stubPage = pageStub(className: projectFile.name);
+    String stubPage = pageStub(
+        className:
+            projectFile.name.snakeCase.replaceAll(RegExp(r'(_?page)'), ""));
     await MetroService.makePage(
-      projectFile.name,
+      projectFile.name.snakeCase.replaceAll(RegExp(r'(_?page)'), ""),
       stubPage,
       forceCreate: hasForceFlag ?? false,
       addToRoute: true,

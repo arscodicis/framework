@@ -1,3 +1,8 @@
+## [5.29.0] - 2024-06-11
+
+* Fix `Metro` to not add duplicate suffixes to some files
+* Update pubspec.yaml
+
 ## [5.28.2] - 2024-06-06
 
 * Update pubspec.yaml
