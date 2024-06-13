@@ -44,7 +44,7 @@ ${model.originalText != "Model" ? '''
   }
 
   /// Delete a ${model.pascalCase}
-  Future<bool?> delete({required int id}) async {
+  Future<bool?> destroy({required int id}) async {
     return await network<bool>(
       request: (request) => request.delete("/endpoint-path/\$id"),
     );

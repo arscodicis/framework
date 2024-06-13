@@ -47,4 +47,4 @@ export 'package:dio/dio.dart';
 export 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 /// Nylo version
-const String nyloVersion = 'v5.29.1';
+const String nyloVersion = 'v5.29.2';
