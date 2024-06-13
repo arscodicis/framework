@@ -1,3 +1,7 @@
+## [5.29.3] - 2024-06-13
+
+* Update pubspec.yaml
+
 ## [5.29.2] - 2024-06-13
 
 * Fix `apiServiceStub` to use `destroy` instead of `delete`
