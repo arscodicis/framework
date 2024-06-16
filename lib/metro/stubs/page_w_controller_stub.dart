@@ -11,7 +11,7 @@ import '/app/controllers/${creationPath != null ? creationPath + "/${className.s
 class ${className.pascalCase}Page extends NyStatefulWidget<${className.pascalCase}Controller> {
   static const path = '/${className.paramCase}';
 
-  ${className.pascalCase}Page({super.key}) : super(path, child: _${className.pascalCase}PageState());
+  ${className.pascalCase}Page({super.key}) : super(path, child: () => _${className.pascalCase}PageState());
 }
 
 class _${className.pascalCase}PageState extends NyState<${className.pascalCase}Page> {
