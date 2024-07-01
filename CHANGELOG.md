@@ -1,3 +1,11 @@
+## [5.31.0] - 2024-07-02
+
+* Ability to create Forms using Metro. E.g. `metro make:form register`
+* New stub for creating Forms
+* Small refactor to model stub
+* Refactor `slate` command to `metro slate:publish`
+* New `metro slate:install` command to install the slate package and publish all the files
+
 ## [5.30.0] - 2024-06-16
 
 * Update stubs

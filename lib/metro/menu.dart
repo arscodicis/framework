@@ -22,9 +22,11 @@ All commands:
   make:api_service
   make:interceptor
   make:theme
+  make:form
   make:route_guard
   make:config
   
-publish
-  publish:slate
+slate
+  slate:publish
+  slate:install
 """;

@@ -7,6 +7,7 @@ import 'package:args/args.dart';
 import 'package:nylo_framework/cli_dialog/cli_dialog.dart';
 import 'package:nylo_framework/json_dart_generator/dart_code_generator.dart';
 import 'package:nylo_framework/metro/stubs/config_stub.dart';
+import 'package:nylo_framework/metro/stubs/form_stub.dart';
 import 'package:nylo_framework/metro/stubs/interceptor_stub.dart';
 import 'package:nylo_framework/metro/stubs/page_bottom_nav_stub.dart';
 import 'package:nylo_framework/metro/stubs/route_guard_stub.dart';
@@ -99,34 +100,65 @@ List<NyCommand> allCommands = [
       category: "make",
       action: _makeRouteGuard),
   NyCommand(
+      name: "form",
+      options: 1,
+      arguments: ["-h", "-f"],
+      category: "make",
+      action: _makeForm),
+  NyCommand(
       name: "config",
       options: 1,
       arguments: ["-h", "-f"],
       category: "make",
       action: _makeConfig),
   NyCommand(
-      name: "slate",
+      name: "install",
       options: 1,
       arguments: ["-h", "-f"],
-      category: "publish",
+      category: "slate",
+      action: _installSlate),
+  NyCommand(
+      name: "publish",
+      options: 1,
+      arguments: ["-h", "-f"],
+      category: "slate",
       action: _publishSlate),
 ];
 
 /// Publishes the contents from a Slate package into a Nylo project.
-/// E.g. run: `dart run nylo_framework:main publish:slate example_slate`
+/// E.g. run: `dart run nylo_framework:main slate:publish example_slate`
 _publishSlate(List<String> arguments) async {
   parser.addFlag(helpFlag,
-      abbr: 'h', help: 'e.g. publish:slate example_slate', negatable: false);
+      abbr: 'h', help: 'e.g. slate:publish example_slate', negatable: false);
 
   final ArgResults argResults = parser.parse(arguments);
 
   MetroService.hasHelpFlag(argResults[helpFlag], parser.usage);
 
   MetroService.checkArguments(arguments,
-      'You are missing the \'name\' of the slate package.\ne.g. publish:slate example_slate');
+      'You are missing the \'name\' of the slate package.\ne.g. slate:publish example_slate');
 
   String slateName = argResults.arguments.first;
 
+  await MetroService.runProcess("dart run $slateName:main publish:all");
+}
+
+/// Installs the contents from a Slate package into a Nylo project.
+/// E.g. run: `dart run nylo_framework:main slate:install example_slate`
+_installSlate(List<String> arguments) async {
+  parser.addFlag(helpFlag,
+      abbr: 'h', help: 'e.g. slate:install example_slate', negatable: false);
+
+  final ArgResults argResults = parser.parse(arguments);
+
+  MetroService.hasHelpFlag(argResults[helpFlag], parser.usage);
+
+  MetroService.checkArguments(arguments,
+      'You are missing the \'name\' of the slate package.\ne.g. slate:install example_slate');
+
+  String slateName = argResults.arguments.first;
+
+  await MetroService.runProcess("dart pub add $slateName");
   await MetroService.runProcess("dart run $slateName:main publish:all");
 }
 
@@ -156,6 +188,35 @@ _makeConfig(List<String> arguments) async {
 
   String stubConfig = configStub(classReCase);
   await MetroService.makeConfig(classReCase.snakeCase, stubConfig,
+      forceCreate: hasForceFlag ?? false);
+}
+
+/// Creates a config file for Nylo projects
+/// E.g. run: `dart run nylo_framework:main make:form register_form`
+_makeForm(List<String> arguments) async {
+  parser.addFlag(helpFlag,
+      abbr: 'h', help: 'e.g. make:form register_form', negatable: false);
+  parser.addFlag(forceFlag,
+      abbr: 'f',
+      help: 'Creates a new form file even if it already exists.',
+      negatable: false);
+
+  final ArgResults argResults = parser.parse(arguments);
+
+  bool? hasForceFlag = argResults[forceFlag];
+
+  MetroService.hasHelpFlag(argResults[helpFlag], parser.usage);
+
+  MetroService.checkArguments(arguments,
+      'You are missing the \'name\' of the form you want to create.\ne.g. make:form login_form');
+
+  String formName =
+      argResults.arguments.first.snakeCase.replaceAll(RegExp(r'(_?form)'), "");
+
+  ReCase classReCase = ReCase(formName);
+
+  String stubForm = formStub(classReCase);
+  await MetroService.makeForm(classReCase.snakeCase, stubForm,
       forceCreate: hasForceFlag ?? false);
 }
 
