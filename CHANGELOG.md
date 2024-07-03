@@ -1,3 +1,7 @@
+## [5.31.1] - 2024-07-03
+
+* Update pubspec.yaml
+
 ## [5.31.0] - 2024-07-02
 
 * Ability to create Forms using Metro. E.g. `metro make:form register`
