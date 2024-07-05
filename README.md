@@ -23,6 +23,9 @@ Some core features available
 * [Localization](https://nylo.dev/docs/5.20.0/localization).
 * [CLI for generating project files](https://nylo.dev/docs/5.20.0/metro).
 * [Elegant API Services for Networking](https://nylo.dev/docs/5.20.0/networking).
+* [State Management](https://nylo.dev/docs/5.20.0/state-management).
+* [Validation](https://nylo.dev/docs/5.20.0/validation).
+* [Create Forms](https://nylo.dev/docs/5.20.0/forms).
 * [Creating App Icons](https://nylo.dev/docs/5.20.0/app-icons).
 * [Project Configuration](https://nylo.dev/docs/5.20.0/configuration).
 * [Streamlined Project Structure](https://nylo.dev/docs/5.20.0/directory-structure).
