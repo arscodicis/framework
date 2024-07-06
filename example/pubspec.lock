@@ -339,7 +339,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "5.31.1"
+    version: "5.31.2"
   nylo_support:
     dependency: transitive
     description:

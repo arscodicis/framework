@@ -1,3 +1,10 @@
+## [5.32.0] - 2024-07-06
+
+* Update the Form stub
+* Add new dependency `date_field`
+* update README
+* Update pubspec.yaml
+
 ## [5.31.2] - 2024-07-05
 
 * Update pubspec.yaml

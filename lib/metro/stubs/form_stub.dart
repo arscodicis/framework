@@ -1,8 +1,15 @@
 import 'package:recase/recase.dart';
 
-/// This stub is used to create a new NyForm.
+/// This stub is used to create NyFormData.
 String formStub(ReCase className) => '''
 import 'package:nylo_framework/nylo_framework.dart';
+
+/* ${className.pascalCase} Form
+|--------------------------------------------------------------------------
+| Usage: https://nylo.dev/docs/5.20.0/forms#how-it-works
+| Casts: https://nylo.dev/docs/5.20.0/forms#form-casts
+| Validation Rules: https://nylo.dev/docs/5.20.0/validation#validation-rules
+|-------------------------------------------------------------------------- */
 
 class ${className.pascalCase}Form extends NyFormData {
 
@@ -10,49 +17,37 @@ class ${className.pascalCase}Form extends NyFormData {
 
   @override
   fields() => [
-    Field("Name", value: "Customize your form ⚡️"),
+     Field("Name",
+        value: "Customize your form ⚡️",
+        cast: FormCast.text(),
+        dummyData: null,
+        style: "compact"
+    ),
     [
-      Field("Price"),
-      Field("Favourite Color", value: ["Red", "Blue", "Green"], selected: "Green"),
+      Field("Price",
+        value: "",
+        cast: FormCast.currency("usd"),
+        dummyData: "19.99",
+        style: "compact",
+      ),
+      Field("Favourite Color",
+        value: "Blue",
+        cast: FormCast.picker(options: [
+          "Red",
+          "Blue",
+          "Green"
+        ]),
+        validate: FormValidator("contains:Red,Blue,Green"),
+        dummyData: "",
+        style: "compact",
+      ),
     ],
+    Field("Bio",
+        value: "",
+        cast: FormCast.textArea(),
+        dummyData: null,
+        style: "compact"
+    ),
   ];
-
-  /// Cast the fields to their respective types
-  /// All available types are below
-  /// https://nylo.dev/docs/5.20.0/form#casts
-  @override
-  Map<String, dynamic> cast() => {
-    "Name": FormCast(),
-    "Price": FormCast.currency("usd"),
-    "Favourite Color": FormCast.picker(),
-  };
-
-  /// Validate the fields
-  /// All available validations are below
-  /// https://nylo.dev/docs/5.20.0/validation#validation-rules
-  @override
-  Map<String, dynamic> validate() => {
-    "Name": FormValidator("not_empty|max:20"),
-    "Price": FormValidator("not_empty"),
-    "Favourite Color": FormValidator("not_empty"),
-  };
-
-  /// Dummy data for the form
-  /// This is used to populate the form with dummy data
-  /// It will be removed when your .env file is set to production
-  @override
-  Map<String, dynamic> dummyData() => {
-    // "Name": "John Doe",
-    // "Price": 123.45,
-  };
-
-  /// Style the TextFields
-  /// This is used to style the fields
-  /// Options: compact
-  @override
-  Map<String, dynamic> style() => {
-    // "Name": "compact",
-    // "Price": "compact",
-  };
 }
 ''';

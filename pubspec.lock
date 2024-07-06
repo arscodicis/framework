@@ -98,7 +98,7 @@ packages:
     source: hosted
     version: "4.1.0"
   date_field:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: date_field
       sha256: "8643c8e5f2ee55b4b389fc567ee27186c5a63570f545b291d61f02ab6ca7981d"
