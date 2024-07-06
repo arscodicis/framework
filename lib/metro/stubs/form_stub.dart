@@ -31,14 +31,14 @@ class ${className.pascalCase}Form extends NyFormData {
         style: "compact",
       ),
       Field("Favourite Color",
-        value: "Blue",
+        value: "",
         cast: FormCast.picker(options: [
           "Red",
           "Blue",
           "Green"
         ]),
         validate: FormValidator("contains:Red,Blue,Green"),
-        dummyData: "",
+        dummyData: "Blue",
         style: "compact",
       ),
     ],

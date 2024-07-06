@@ -1,3 +1,7 @@
+## [5.32.1] - 2024-07-06
+
+* Update pubspec.yaml
+
 ## [5.32.0] - 2024-07-06
 
 * Update the Form stub
