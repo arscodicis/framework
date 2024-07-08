@@ -25,27 +25,23 @@ class ${className.pascalCase}Form extends NyFormData {
     ),
     [
       Field("Price",
-        value: "",
         cast: FormCast.currency("usd"),
         dummyData: "19.99",
         style: "compact",
       ),
       Field("Favourite Color",
-        value: "",
         cast: FormCast.picker(options: [
           "Red",
           "Blue",
           "Green"
         ]),
-        validate: FormValidator("contains:Red,Blue,Green"),
+        validate: FormValidator.rule("contains:Red,Blue,Green"),
         dummyData: "Blue",
         style: "compact",
       ),
     ],
     Field("Bio",
-        value: "",
         cast: FormCast.textArea(),
-        dummyData: null,
         style: "compact"
     ),
   ];
