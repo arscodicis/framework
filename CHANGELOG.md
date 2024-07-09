@@ -1,3 +1,7 @@
+## [5.32.3] - 2024-07-09
+
+* Update pubspec.yaml
+
 ## [5.32.2] - 2024-07-08
 
 * Refactor Form stub
