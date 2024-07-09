@@ -1,3 +1,7 @@
+## [5.32.5] - 2024-07-09
+
+* Update import paths in Metro
+
 ## [5.32.4] - 2024-07-09
 
 * Update pubspec.yaml
