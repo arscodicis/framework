@@ -1,3 +1,7 @@
+## [5.32.4] - 2024-07-09
+
+* Update pubspec.yaml
+
 ## [5.32.3] - 2024-07-09
 
 * Update pubspec.yaml
