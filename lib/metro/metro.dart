@@ -468,7 +468,7 @@ _makeApiService(List<String> arguments) async {
       }
     });
 
-    final dialogQuestions = CLI_Dialog(listQuestions: [
+    final dialogQuestions = CliDialog(listQuestions: [
       [
         {
           'question': 'Which Postman collection would you like to use?',
@@ -1134,7 +1134,7 @@ _makePage(List<String> arguments) async {
   }
 
   if (argResults[bottomNavFlag]) {
-    final dialogQuestions = CLI_Dialog(listQuestions: [
+    final dialogQuestions = CliDialog(listQuestions: [
       [
         {
           'question': 'How many tabs will the page have?',

@@ -4,10 +4,11 @@ export 'list_chooser.dart';
 import 'services.dart';
 import 'xterm.dart';
 
-enum _questionType { message, question, booleanQuestion, listQuestion }
+/// This enum is used to indicate the type of question in the CLI dialog.
+enum CliDialogQuestionType { message, question, booleanQuestion, listQuestion }
 
 /// This is the most important class which should usually be instantiated when building CLI dialogs.
-class CLI_Dialog {
+class CliDialog {
   /// This is where the results = answers from the CLI dialog go. This map is updated and returned when calling [ask].
   Map answers = {};
 
@@ -42,7 +43,7 @@ class CLI_Dialog {
   /// Furthermore you can pass a particular order. If no order is given then the default order is used (see README.md)
   /// There is also [trueByDefault] (false by default) which indicates how booleanQuestions behave if no input is given
   /// There are basic format checks which try to prevent you from passing invalid argmuents.
-  CLI_Dialog(
+  CliDialog(
       {this.messages,
       this.questions,
       this.booleanQuestions,
@@ -63,7 +64,7 @@ class CLI_Dialog {
   /// std_input.addToBuffer(...Keys.arrowDown, Keys.enter);
   /// final dialog = CLI_Dialog.std(std_input, std_output, listQuestions: listQuestions);
   /// ```
-  CLI_Dialog.std(this._std_input, this._std_output,
+  CliDialog.std(this._std_input, this._std_output,
       {this.messages,
       this.questions,
       this.booleanQuestions,
@@ -313,16 +314,16 @@ class CLI_Dialog {
   }
 
   Function? _getFunctionForQuestionType(type) {
-    if (type == _questionType.message) {
+    if (type == CliDialogQuestionType.message) {
       return _displayMessage;
     }
-    if (type == _questionType.question) {
+    if (type == CliDialogQuestionType.question) {
       return _askQuestion;
     }
-    if (type == _questionType.booleanQuestion) {
+    if (type == CliDialogQuestionType.booleanQuestion) {
       return _askBooleanQuestion;
     }
-    if (type == _questionType.listQuestion) {
+    if (type == CliDialogQuestionType.listQuestion) {
       return _askListQuestion;
     }
     return null;
@@ -366,18 +367,18 @@ class CLI_Dialog {
     return navList;
   }
 
-  _questionType? _getQuestionType(item) {
+  CliDialogQuestionType? _getQuestionType(item) {
     if (messages!.contains(item)) {
-      return _questionType.message;
+      return CliDialogQuestionType.message;
     }
     if (questions!.contains(item)) {
-      return _questionType.question;
+      return CliDialogQuestionType.question;
     }
     if (booleanQuestions!.contains(item)) {
-      return _questionType.booleanQuestion;
+      return CliDialogQuestionType.booleanQuestion;
     }
     if (listQuestions!.contains(item)) {
-      return _questionType.listQuestion;
+      return CliDialogQuestionType.listQuestion;
     }
     return null;
   }
@@ -407,7 +408,7 @@ class CLI_Dialog {
     if (navigationMode && order != null) {
       for (var i = _navigationIndex - 1; i >= 0; i--) {
         if (_getQuestionType(_simpleSearch(order![i])) ==
-            _questionType.message) {
+            CliDialogQuestionType.message) {
           messagesBefore++;
         }
       }
