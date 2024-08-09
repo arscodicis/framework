@@ -1,3 +1,7 @@
+## [5.32.7] - 2024-08-09
+
+* Update pubspec.yaml
+
 ## [5.32.6] - 2024-07-18
 
 * Small refactor to cli_dialog to pass static analysis
