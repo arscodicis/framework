@@ -2,14 +2,16 @@ import 'package:recase/recase.dart';
 
 /// This stub is used to create a new bottom nav page.
 String pageBottomNavStub({required String className, required int tabCount}) =>
+    // ignore: prefer_interpolation_to_compose_strings
     '''
 import 'package:flutter/material.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 class ${className.pascalCase}Page extends NyStatefulWidget {
-  static const path = '/${className.paramCase}';
   
-  ${className.pascalCase}Page({super.key}) : super(path, child: () => _${className.pascalCase}PageState());
+  static RouteView path = ("/${className.paramCase}", (_) => ${className.pascalCase}Page());
+  
+  ${className.pascalCase}Page() : super(child: () => _${className.pascalCase}PageState());
 }
 
 class _${className.pascalCase}PageState extends NyState<${className.pascalCase}Page> {

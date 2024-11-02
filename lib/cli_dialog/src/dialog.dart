@@ -64,7 +64,7 @@ class CliDialog {
   /// std_input.addToBuffer(...Keys.arrowDown, Keys.enter);
   /// final dialog = CLI_Dialog.std(std_input, std_output, listQuestions: listQuestions);
   /// ```
-  CliDialog.std(this._std_input, this._std_output,
+  CliDialog.std(this._stdInput, this._stdOutput,
       {this.messages,
       this.questions,
       this.booleanQuestions,
@@ -77,24 +77,24 @@ class CliDialog {
   }
 
   /// This method is another way of adding questions after instantiating [CLI_Dialog]
-  /// Pass [is_bool] or [is_list] as a named argument to indicate the type of question you are adding (boolean qualifier).
+  /// Pass [is_bool] or [isList] as a named argument to indicate the type of question you are adding (boolean qualifier).
   ///
   /// ```
   /// final dialog = CLI_Dialog();
-  /// dialog.addQuestion([{'question': 'How are you?', options: ['Good', 'Not so good']}, 'mood'], is_list: true);
+  /// dialog.addQuestion([{'question': 'How are you?', options: ['Good', 'Not so good']}, 'mood'], isList: true);
   /// ```
-  void addQuestion(p_question, key,
-      {is_boolean = false, is_list = false, is_message = false}) {
-    if ((is_boolean ? 1 : 0) + (is_list ? 1 : 0) + (is_message ? 1 : 0) > 1) {
+  void addQuestion(pQuestion, key,
+      {isBoolean = false, isList = false, isMessage = false}) {
+    if ((isBoolean ? 1 : 0) + (isList ? 1 : 0) + (isMessage ? 1 : 0) > 1) {
       throw ArgumentError(
           'A question can not have more than one boolean qualifier.');
     }
-    final newItem = [p_question, key];
-    if (is_boolean) {
+    final newItem = [pQuestion, key];
+    if (isBoolean) {
       booleanQuestions!.add(newItem);
-    } else if (is_list) {
+    } else if (isList) {
       listQuestions!.add(newItem);
-    } else if (is_message) {
+    } else if (isMessage) {
       messages!.add(newItem);
     } else {
       questions!.add(newItem);
@@ -102,16 +102,16 @@ class CliDialog {
   }
 
   /// Same as [addQuestion] but you can add multiple questions (of the same type)
-  void addQuestions(p_questions,
-      {is_boolean = false, is_list = false, is_message = false}) {
-    if (is_boolean) {
-      booleanQuestions!.addAll(p_questions);
-    } else if (is_list) {
-      listQuestions!.addAll(p_questions);
-    } else if (is_message) {
-      messages!.addAll(p_questions);
+  void addQuestions(pQuestions,
+      {isBoolean = false, isList = false, isMessage = false}) {
+    if (isBoolean) {
+      booleanQuestions!.addAll(pQuestions);
+    } else if (isList) {
+      listQuestions!.addAll(pQuestions);
+    } else if (isMessage) {
+      messages!.addAll(pQuestions);
     } else {
-      questions!.addAll(p_questions);
+      questions!.addAll(pQuestions);
     }
   }
 
@@ -136,37 +136,37 @@ class CliDialog {
 
   // END OF PUBLIC API
 
-  var _std_input = StdinService();
-  var _std_output = StdoutService();
+  var _stdInput = StdinService();
+  var _stdOutput = StdoutService();
 
   void _askBooleanQuestion(question, key) {
-    _std_output.write(_booleanQuestion(question));
+    _stdOutput.write(_booleanQuestion(question));
     _getBooleanAnswer(question, key);
   }
 
   void _askListQuestion(optionsMap, key) {
-    _std_output.writeln(_listQuestion(optionsMap['question']));
+    _stdOutput.writeln(_listQuestion(optionsMap['question']));
     _getListAnswer(optionsMap['options'], key);
   }
 
   void _askQuestion(question, key) {
-    _std_output.write(_question(question));
+    _stdOutput.write(_question(question));
     _getAnswer(question, key);
   }
 
   String _booleanQuestion(str) =>
-      _question(str) + _comment(trueByDefault ? '(Y/n)' : '(y/N)') + ' ';
+      '${_question(str)}${_comment(trueByDefault ? '(Y/n)' : '(y/N)')} ';
 
   void _checkDuplicateKeys() {
     var keyList = [];
 
-    [questions, booleanQuestions, listQuestions].forEach((entry) {
+    for (var entry in [questions, booleanQuestions, listQuestions]) {
       if (entry != null) {
-        entry.forEach((element) {
+        for (var element in entry) {
           keyList.add(element[1]);
-        });
+        }
       }
-    });
+    }
 
     //check for duplicates
     if (keyList.length != keyList.toSet().length) {
@@ -181,7 +181,7 @@ class CliDialog {
         _navigationIndex = int.parse(input.substring(1)) - 1;
         // -1 because _navigationIndex will be incremented in _iterateCustomOrder()
         _navigationIndex += _messagesBefore - 1;
-        _std_output.writeln('');
+        _stdOutput.writeln('');
         return true;
       }
       return false;
@@ -190,16 +190,16 @@ class CliDialog {
   }
 
   void _checkQuestions() {
-    [messages].forEach((element) {
+    for (var element in [messages]) {
       if (element is List && element.length > 2) {
         throw ArgumentError(
             'Each message is either just a string or a list with a string and a key.');
       }
-    });
+    }
 
-    [questions, booleanQuestions, listQuestions].forEach((entry) {
+    for (var entry in [questions, booleanQuestions, listQuestions]) {
       if (entry != null) {
-        entry.forEach((element) {
+        for (var element in entry) {
           if (element != null) {
             if (element.length != 2) {
               throw ArgumentError(
@@ -208,22 +208,22 @@ class CliDialog {
           } else {
             throw ArgumentError('All questions and keys must be Strings.');
           }
-        });
+        }
       }
-    });
+    }
 
-    [questions, booleanQuestions].forEach((entry) {
+    for (var entry in [questions, booleanQuestions]) {
       if (entry != null) {
-        entry.forEach((element) {
+        for (var element in entry) {
           if (element[0] is! String || element[1] is! String) {
             throw ArgumentError('All questions and keys must be Strings.');
           }
-        });
+        }
       }
-    });
+    }
 
     if (listQuestions != null) {
-      listQuestions!.forEach((element) {
+      for (var element in listQuestions!) {
         if (element[0]['question'] is! String) {
           throw ArgumentError('Your question must be a String.');
         }
@@ -235,7 +235,7 @@ class CliDialog {
           throw ArgumentError(
               'Your list dialog map must have exactly two entries.');
         }
-      });
+      }
     }
     _checkDuplicateKeys();
   }
@@ -262,28 +262,28 @@ class CliDialog {
 
   void _displayMessage(msg, key) {
     if (msg is String) {
-      _std_output.writeln(_comment(msg));
+      _stdOutput.writeln(_comment(msg));
     } else {
-      _std_output.writeln(_comment(msg[0]));
+      _stdOutput.writeln(_comment(msg[0]));
     }
   }
 
   dynamic _findQuestion(key) {
     dynamic ret;
-    [
+    for (var element in [
       [messages, _displayMessage],
       [questions, _askQuestion],
       [booleanQuestions, _askBooleanQuestion],
       [listQuestions, _askListQuestion]
-    ].forEach((element) {
+    ]) {
       if (element[0] != null) {
         var retVal = _search(element[0], element[1], key);
         if (retVal != null) {
           ret = retVal;
-          return;
+          continue;
         }
       }
-    });
+    }
     return ret;
   }
 
@@ -291,10 +291,8 @@ class CliDialog {
     final input = _getInput(_question(question));
     if (!_checkNavigation(input)) {
       answers[key] = input;
-      _std_output.writeln('\r' +
-          _question(question) +
-          XTerm.teal(answers[key]) +
-          XTerm.blankRemaining());
+      _stdOutput.writeln(
+          '\r${_question(question)}${XTerm.teal(answers[key])}${XTerm.blankRemaining()}');
     }
   }
 
@@ -307,9 +305,9 @@ class CliDialog {
         answers[key] = (input[0] == 'y' || input[0] == 'Y');
       }
       var replaceStr =
-          '\r' + _booleanQuestion(question) + XTerm.blankRemaining();
+          '\r${_booleanQuestion(question)}${XTerm.blankRemaining()}';
       replaceStr += (answers[key] ? XTerm.teal('Yes') : XTerm.teal('No'));
-      _std_output.writeln(replaceStr);
+      _stdOutput.writeln(replaceStr);
     }
   }
 
@@ -333,22 +331,21 @@ class CliDialog {
     var input = '';
     if (!acceptEmptyAnswer) {
       while (input.isEmpty) {
-        input = _std_input
+        input = _stdInput
             .readLineSync(encoding: Encoding.getByName('utf-8'))!
             .trim();
-        _std_output.write(XTerm.moveUp(1) + formattedQuestion);
+        _stdOutput.write(XTerm.moveUp(1) + formattedQuestion);
       }
     } else {
-      input = _std_input
-          .readLineSync(encoding: Encoding.getByName('utf-8'))!
-          .trim();
-      _std_output.write(XTerm.moveUp(1) + formattedQuestion);
+      input =
+          _stdInput.readLineSync(encoding: Encoding.getByName('utf-8'))!.trim();
+      _stdOutput.write(XTerm.moveUp(1) + formattedQuestion);
     }
     return input;
   }
 
   void _getListAnswer(options, key) {
-    var chooser = ListChooser.std(_std_input, _std_output, options,
+    var chooser = ListChooser.std(_stdInput, _stdOutput, options,
         navigationMode: navigationMode);
     final input = chooser.choose();
     if (!_checkNavigation(input)) {
@@ -361,9 +358,9 @@ class CliDialog {
 
   List getCustomNavList() {
     var navList = [];
-    order!.forEach((key) {
+    for (var key in order!) {
       navList.add(_simpleSearch(key));
-    });
+    }
     return navList;
   }
 
@@ -419,11 +416,7 @@ class CliDialog {
   int _navigationIndex = 0;
 
   String _question(str) =>
-      (navigationMode ? '(${_navigationIndex + 1 - _messagesBefore}) ' : '') +
-      XTerm.green('?') +
-      ' ' +
-      XTerm.bold(str) +
-      ' ';
+      '${navigationMode ? '(${_navigationIndex + 1 - _messagesBefore}) ' : ''}${XTerm.green('?')} ${XTerm.bold(str)} ';
   dynamic _search(list, fn, key) {
     dynamic ret;
     list.forEach((element) {
@@ -437,17 +430,17 @@ class CliDialog {
 
   dynamic _simpleSearch(String key) {
     dynamic ret;
-    [messages, questions, booleanQuestions, listQuestions].forEach((list) {
-      list!.forEach((element) {
+    for (var list in [messages, questions, booleanQuestions, listQuestions]) {
+      for (var element in list!) {
         if (element[1] == key) {
           ret = element;
-          return; // break
+          continue; // break
         }
-      });
-      if (ret != null) {
-        return;
       }
-    });
+      if (ret != null) {
+        continue;
+      }
+    }
     return ret;
   }
 

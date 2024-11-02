@@ -1,11 +1,16 @@
+import 'package:recase/recase.dart';
+
 /// This stub is used to create a new Model.
-String modelStub({String? modelName}) => '''
+String modelStub({required ReCase modelName}) => '''
 import 'package:nylo_framework/nylo_framework.dart';
 
-class $modelName extends Model {
-  $modelName();
+class ${modelName.pascalCase} extends Model {
+
+  static StorageKey key = "${modelName.snakeCase}";
   
-  $modelName.fromJson(data) {
+  ${modelName.pascalCase}() : super(key: key);
+  
+  ${modelName.pascalCase}.fromJson(data) {
 
   }
 

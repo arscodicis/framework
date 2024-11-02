@@ -1,5 +1,4 @@
 import 'package:collection/collection.dart';
-
 import 'class_type.dart';
 import 'extension.dart';
 
@@ -188,12 +187,11 @@ class ValueDef {
           .expand((element) => element)
           .toList();
 
-      // 一個一個加, 重複的去除
-      childrenObject.forEach((outerE) {
+      for (var outerE in childrenObject) {
         var isExist = objects.any((innerE) {
           var result = innerE.isStructSame(outerE);
           if (innerE.key == 'ios') {
-            print('$result');
+            print(result);
           }
           return result;
         });
@@ -201,7 +199,7 @@ class ValueDef {
         if (!isExist) {
           objects.add(outerE);
         }
-      });
+      }
     } else if (childrenDef is Map<String, ValueDef>) {
       var childrenObject = (childrenDef as Map<String, ValueDef>)
           .entries
@@ -209,7 +207,7 @@ class ValueDef {
           .expand((element) => element)
           .toList();
 
-      childrenObject.forEach((outerE) {
+      for (var outerE in childrenObject) {
         var isExist = objects.any((innerE) {
           var result = innerE.isStructSame(outerE);
           return result;
@@ -218,7 +216,7 @@ class ValueDef {
         if (!isExist) {
           objects.add(outerE);
         }
-      });
+      }
     }
     return objects;
   }
@@ -250,11 +248,6 @@ class ValueDef {
       var otherKeyList = (other.childrenDef as Map<String, ValueDef>).entries;
       var isLengthSame = thisKeyList.length == otherKeyList.length;
 
-      if (debug) {
-        print(
-            'ori($key) = ${thisKeyList.length}, other(${other.key}) = ${otherKeyList.length}');
-      }
-
       if (isLengthSame) {
         var isSame = !thisKeyList.any((element) {
           var thisKey = element.key;
@@ -270,10 +263,6 @@ class ValueDef {
             return true;
           }
         });
-
-        if (debug) {
-          print('$isSame');
-        }
 
         return isSame;
       }
@@ -320,10 +309,10 @@ class ValueDef {
 
   void _detectAllParentNode() {
     if (childrenDef is List<ValueDef>) {
-      (childrenDef as List<ValueDef>).forEach((element) {
+      for (var element in (childrenDef as List<ValueDef>)) {
         element.parent = this;
         element._detectAllParentNode();
-      });
+      }
     } else if (childrenDef is Map<String, ValueDef>) {
       (childrenDef as Map<String, ValueDef>).forEach((key, value) {
         value.parent = this;
@@ -519,7 +508,7 @@ class ValueDef {
   String get customObjectString {
     var text = '';
 
-    customObjects.forEach((element) {
+    for (var element in customObjects) {
       if (text.isNotEmpty) {
         text += '\n\n';
       }
@@ -527,7 +516,7 @@ class ValueDef {
       element.parent = null;
       text += element.structString;
       element.parent = tempParent;
-    });
+    }
     return text;
   }
 
@@ -566,7 +555,7 @@ extension StringExtension on String {
       if (text.length >= 2) {
         return '${text[0].toUpperCase()}${text.substring(1)}';
       } else if (text.length == 1) {
-        return '${text[0].toUpperCase()}';
+        return text[0].toUpperCase();
       } else {
         return text;
       }

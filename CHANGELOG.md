@@ -1,15 +1,11 @@
-## [5.32.8] - 2024-09-04
+## [6.0.0] - 2024-11-02
 
-* Update pubspec.yaml
-
-## [5.32.7] - 2024-08-09
-
-* Update pubspec.yaml
+* New version of Nylo - read more about the changes [here](https://nylo.dev/)
 
 ## [5.32.6] - 2024-07-18
 
 * Small refactor to cli_dialog to pass static analysis
-* Update pubspec.yaml 
+* Update pubspec.yaml
 
 ## [5.32.5] - 2024-07-09
 

@@ -35,11 +35,11 @@ class StdoutService {
   /// For a string version see [getStringOutput]
   List getOutput() {
     final ret = [];
-    _output.forEach((element) {
+    for (var element in _output) {
       if (element.isNotEmpty) {
         ret.add(element);
       }
-    });
+    }
     return ret;
   }
 

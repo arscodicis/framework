@@ -3,7 +3,7 @@ import 'json_def.dart';
 
 extension DartCodeGenerator on ValueDef {
   String get classCode {
-    if (!(childrenDef is List) && !(childrenDef is Map)) {
+    if (childrenDef is! List && childrenDef is! Map) {
       return '';
     }
 
@@ -30,20 +30,20 @@ extension DartCodeGenerator on ValueDef {
 
       var text = '';
       if (childrenDef is List<ValueDef>) {
-        var prefix = '${detectListInner(this)}';
+        var prefix = detectListInner(this);
         text += '$prefix value;';
       } else if (childrenDef is Map<String, ValueDef>) {
         var keyMap = childrenDef as Map<String, ValueDef>;
         keyMap.forEach((key, value) {
           if (value.type == ClassType.tListDynamic) {
-            var prefix = '${detectListInner(value)}';
+            var prefix = detectListInner(value);
             text += '$prefix ${key.lowerCamel()};';
           } else if (value.type == ClassType.tObject) {
             late ValueDef findCustomDef;
             try {
               findCustomDef = findCustomObject(value)!;
             } catch (e) {
-              print('$value');
+              print(value);
             }
             text += '${findCustomDef.classNameFull}? ${key.lowerCamel()};';
           } else {

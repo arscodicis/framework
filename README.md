@@ -18,17 +18,17 @@ This project is open source and MIT-licenced, we welcome any contributions. You 
 
 ## Features
 Some core features available
-* [Routing](https://nylo.dev/docs/5.20.0/router).
-* [Light and dark themes](https://nylo.dev/docs/5.20.0/themes-and-styling).
-* [Localization](https://nylo.dev/docs/5.20.0/localization).
-* [CLI for generating project files](https://nylo.dev/docs/5.20.0/metro).
-* [Elegant API Services for Networking](https://nylo.dev/docs/5.20.0/networking).
-* [State Management](https://nylo.dev/docs/5.20.0/state-management).
-* [Validation](https://nylo.dev/docs/5.20.0/validation).
-* [Form Handling](https://nylo.dev/docs/5.20.0/forms).
-* [Creating App Icons](https://nylo.dev/docs/5.20.0/app-icons).
-* [Project Configuration](https://nylo.dev/docs/5.20.0/configuration).
-* [Streamlined Project Structure](https://nylo.dev/docs/5.20.0/directory-structure).
+* [Routing](https://nylo.dev/docs/6.x/router).
+* [Light and dark themes](https://nylo.dev/docs/6.x/themes-and-styling).
+* [Localization](https://nylo.dev/docs/6.x/localization).
+* [CLI for generating project files](https://nylo.dev/docs/6.x/metro).
+* [Elegant API Services for Networking](https://nylo.dev/docs/6.x/networking).
+* [State Management](https://nylo.dev/docs/6.x/state-management).
+* [Validation](https://nylo.dev/docs/6.x/validation).
+* [Form Handling](https://nylo.dev/docs/6.x/forms).
+* [Creating App Icons](https://nylo.dev/docs/6.x/app-icons).
+* [Project Configuration](https://nylo.dev/docs/6.x/configuration).
+* [Streamlined Project Structure](https://nylo.dev/docs/6.x/directory-structure).
 
 ## Documentation
 

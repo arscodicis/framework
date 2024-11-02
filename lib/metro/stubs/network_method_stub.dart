@@ -27,7 +27,7 @@ String _getType(String? model,
     bool isList = false,
     bool addBrackets = false}) {
   if (model != null) {
-    String type = '$model';
+    String type = model;
     String optional = isOptional ? '?' : '';
     if (addBrackets) {
       if (isList) {
@@ -68,6 +68,7 @@ String _mapParams(Map<String, dynamic> queryParams,
   if (params.entries.isEmpty) {
     return '';
   }
+  // ignore: prefer_interpolation_to_compose_strings
   return "{" +
       params.entries
           .map((e) {

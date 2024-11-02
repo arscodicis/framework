@@ -18,7 +18,7 @@ class ${rc.pascalCase}Provider implements NyProvider {
   @override
   afterBoot(Nylo nylo) async {
    
-     // Called after booting your provider
+     // Called after Nylo has finished booting
      // ...
   }
 }

@@ -6,23 +6,18 @@ import 'package:flutter/material.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 class ${className.pascalCase}Page extends NyStatefulWidget {
-  static const path = '/${className.paramCase}';
+
+  static RouteView path = ("/${className.paramCase}", (_) => ${className.pascalCase}Page());
   
-  ${className.pascalCase}Page({super.key}) : super(path, child: () => _${className.pascalCase}PageState());
+  ${className.pascalCase}Page() : super(child: () => _${className.pascalCase}PageState());
 }
 
-class _${className.pascalCase}PageState extends NyState<${className.pascalCase}Page> {
+class _${className.pascalCase}PageState extends NyPage<${className.pascalCase}Page> {
 
   @override
-  init() async {
+  get init => () {
 
-  }
-  
-  /// Use boot if you need to load data before the [view] is rendered.
-  // @override
-  // boot() async {
-  //
-  // }
+  };
 
   @override
   Widget view(BuildContext context) {

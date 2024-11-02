@@ -48,18 +48,18 @@ class StdinService {
     }
     int? key;
     if (Platform.isWindows) {
-      var key_input = console.readKey().toString();
-      if (key_input.startsWith('ControlCharacter')) {
-        key_input = key_input.split('.')[1];
-        if (key_input == 'arrowUp') {
-          return WIN_UP;
-        } else if (key_input == 'arrowDown') {
-          return WIN_DOWN;
-        } else if (key_input == 'enter') {
-          return WIN_ENTER;
+      var keyInput = console.readKey().toString();
+      if (keyInput.startsWith('ControlCharacter')) {
+        keyInput = keyInput.split('.')[1];
+        if (keyInput == 'arrowUp') {
+          return winUp;
+        } else if (keyInput == 'arrowDown') {
+          return winDown;
+        } else if (keyInput == 'enter') {
+          return winEnter;
         }
       } else {
-        return key_input.codeUnitAt(0);
+        return keyInput.codeUnitAt(0);
       }
     } else {
       key = stdin.readByteSync();

@@ -6,15 +6,15 @@ abstract class Keys {
   /// Arrow down. Consists of three bytes.
   /// For historical reasons, you can also use 's' instead of arrow down on Windows.
   /// It is packed into a single element list in order to not break the spread syntax.
-  static final arrowDown = Platform.isWindows ? [WIN_DOWN] : [27, 91, 66];
+  static final arrowDown = Platform.isWindows ? [winDown] : [27, 91, 66];
 
   /// Arrows up. Consists of three bytes in Unix like systems (including MacOS).
   /// For historical reasons, you can also use 'w' insted of arrow up on Windows.
   /// It is packed into a single element list in order to not break the spread syntax.
-  static final arrowUp = Platform.isWindows ? [WIN_UP] : [27, 91, 65];
+  static final arrowUp = Platform.isWindows ? [winUp] : [27, 91, 65];
 
   /// Enter key. Single byte.
-  static final enter = Platform.isWindows ? WIN_ENTER : 10;
+  static final enter = Platform.isWindows ? winEnter : 10;
 }
 
 /// Abstract class providing XTerm escape sequences
@@ -24,13 +24,13 @@ abstract class XTerm {
   static String blankRemaining() => '\u001b[0K';
 
   /// Bold output.
-  static String bold(str) => '\u001b[1m' + str + reset;
+  static String bold(str) => '\u001b[1m$str$reset';
 
   /// Gray color.
-  static String gray(str) => '\u001b[38;5;246m' + str + reset;
+  static String gray(str) => '\u001b[38;5;246m$str$reset';
 
   /// Green color.
-  static String green(str) => '\u001b[32m' + str + reset;
+  static String green(str) => '\u001b[32m$str$reset';
 
   /// The reverse of '\n'. Goes to the beginning of the previous line.
   static String moveUp(n) => '\u001b[${n}A';
@@ -49,5 +49,5 @@ abstract class XTerm {
       Platform.isWindows ? teal('>') : teal('\u276F');
 
   /// Teal (=blue/green) color.
-  static String teal(str) => '\u001b[38;5;6m' + str + reset;
+  static String teal(str) => '\u001b[38;5;6m$str$reset';
 }

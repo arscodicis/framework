@@ -4,7 +4,7 @@ import 'package:recase/recase.dart';
 String configStub(ReCase configName) => '''
 /* ${configName.titleCase}
 |--------------------------------------------------------------------------
-| Learn more: https://nylo.dev/docs/5.20.0/configuration
+| Learn more: https://nylo.dev/docs/6.x/configuration
 |-------------------------------------------------------------------------- */
 
 // ...

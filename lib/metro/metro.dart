@@ -9,8 +9,10 @@ import 'package:nylo_framework/json_dart_generator/dart_code_generator.dart';
 import 'package:nylo_framework/metro/stubs/config_stub.dart';
 import 'package:nylo_framework/metro/stubs/form_stub.dart';
 import 'package:nylo_framework/metro/stubs/interceptor_stub.dart';
+import 'package:nylo_framework/metro/stubs/navigation_hub_stub.dart';
 import 'package:nylo_framework/metro/stubs/page_bottom_nav_stub.dart';
 import 'package:nylo_framework/metro/stubs/route_guard_stub.dart';
+import 'package:nylo_framework/metro/stubs/widget_state_managed_stub.dart';
 import 'package:nylo_support/metro/models/metro_project_file.dart';
 import 'package:nylo_support/metro/models/ny_command.dart';
 import 'package:nylo_framework/metro/stubs/api_service_stub.dart';
@@ -64,6 +66,18 @@ List<NyCommand> allCommands = [
       category: "make",
       action: _makeStatelessWidget),
   NyCommand(
+      name: "state_managed_widget",
+      options: 1,
+      arguments: ["-h", "-f"],
+      category: "make",
+      action: _makeStateManagedWidget),
+  NyCommand(
+      name: "navigation_hub",
+      options: 1,
+      arguments: ["-h", "-f"],
+      category: "make",
+      action: _makeNavigationHub),
+  NyCommand(
       name: "provider",
       options: 1,
       arguments: ["-h", "-f"],
@@ -111,56 +125,7 @@ List<NyCommand> allCommands = [
       arguments: ["-h", "-f"],
       category: "make",
       action: _makeConfig),
-  NyCommand(
-      name: "install",
-      options: 1,
-      arguments: ["-h", "-f"],
-      category: "slate",
-      action: _installSlate),
-  NyCommand(
-      name: "publish",
-      options: 1,
-      arguments: ["-h", "-f"],
-      category: "slate",
-      action: _publishSlate),
 ];
-
-/// Publishes the contents from a Slate package into a Nylo project.
-/// E.g. run: `dart run nylo_framework:main slate:publish example_slate`
-_publishSlate(List<String> arguments) async {
-  parser.addFlag(helpFlag,
-      abbr: 'h', help: 'e.g. slate:publish example_slate', negatable: false);
-
-  final ArgResults argResults = parser.parse(arguments);
-
-  MetroService.hasHelpFlag(argResults[helpFlag], parser.usage);
-
-  MetroService.checkArguments(arguments,
-      'You are missing the \'name\' of the slate package.\ne.g. slate:publish example_slate');
-
-  String slateName = argResults.arguments.first;
-
-  await MetroService.runProcess("dart run $slateName:main publish:all");
-}
-
-/// Installs the contents from a Slate package into a Nylo project.
-/// E.g. run: `dart run nylo_framework:main slate:install example_slate`
-_installSlate(List<String> arguments) async {
-  parser.addFlag(helpFlag,
-      abbr: 'h', help: 'e.g. slate:install example_slate', negatable: false);
-
-  final ArgResults argResults = parser.parse(arguments);
-
-  MetroService.hasHelpFlag(argResults[helpFlag], parser.usage);
-
-  MetroService.checkArguments(arguments,
-      'You are missing the \'name\' of the slate package.\ne.g. slate:install example_slate');
-
-  String slateName = argResults.arguments.first;
-
-  await MetroService.runProcess("dart pub add $slateName");
-  await MetroService.runProcess("dart run $slateName:main publish:all");
-}
 
 /// Creates a config file for Nylo projects
 /// E.g. run: `dart run nylo_framework:main make:config permission_settings`
@@ -198,7 +163,7 @@ _makeForm(List<String> arguments) async {
       abbr: 'h', help: 'e.g. make:form register_form', negatable: false);
   parser.addFlag(forceFlag,
       abbr: 'f',
-      help: 'Creates a new form file even if it already exists.',
+      help: 'Creates a new form even if it already exists.',
       negatable: false);
 
   final ArgResults argResults = parser.parse(arguments);
@@ -249,6 +214,66 @@ _makeStatefulWidget(List<String> arguments) async {
   String stubStatefulWidget = widgetStatefulStub(classReCase);
   await MetroService.makeStatefulWidget(
       classReCase.snakeCase, stubStatefulWidget,
+      forceCreate: hasForceFlag ?? false);
+}
+
+/// Creates a State Managed Widget file for Nylo projects
+/// E.g. run: `dart run nylo_framework:main make:state_managed cart_icon`
+_makeStateManagedWidget(List<String> arguments) async {
+  parser.addFlag(helpFlag,
+      abbr: 'h',
+      help: 'e.g. make:state_managed_widget cart_icon',
+      negatable: false);
+  parser.addFlag(forceFlag,
+      abbr: 'f',
+      help: 'Creates a new state_managed widget even if it already exists.',
+      negatable: false);
+
+  final ArgResults argResults = parser.parse(arguments);
+
+  bool? hasForceFlag = argResults[forceFlag];
+
+  MetroService.hasHelpFlag(argResults[helpFlag], parser.usage);
+
+  MetroService.checkArguments(arguments,
+      'You are missing the \'name\' of the state managed widget that you want to create.\ne.g. make:state_managed my_new_widget');
+
+  String widgetName = argResults.arguments.first.snakeCase
+      .replaceAll(RegExp(r'(_?widget)'), "");
+
+  ReCase classReCase = ReCase(widgetName);
+
+  String stubStatefulWidget = widgetStateManagedStub(classReCase);
+  await MetroService.makeStateManagedWidget(
+      classReCase.snakeCase, stubStatefulWidget,
+      forceCreate: hasForceFlag ?? false);
+}
+
+_makeNavigationHub(List<String> arguments) async {
+  parser.addFlag(helpFlag,
+      abbr: 'h',
+      help: 'e.g. make:navigation_hub nav_base_page',
+      negatable: false);
+  parser.addFlag(forceFlag,
+      abbr: 'f',
+      help: 'Creates a new navigation hub even if it already exists.',
+      negatable: false);
+
+  final ArgResults argResults = parser.parse(arguments);
+
+  bool? hasForceFlag = argResults[forceFlag];
+
+  MetroService.hasHelpFlag(argResults[helpFlag], parser.usage);
+
+  MetroService.checkArguments(arguments,
+      'You are missing the \'name\' of the navigation hub that you want to create.\ne.g. make:navigation_hub base_navigation_hub');
+
+  String className =
+      argResults.arguments.first.snakeCase.replaceAll(RegExp(r'(_?page)'), "");
+  ReCase classReCase = ReCase(className);
+
+  String navigationHub = navigationHubStub(classReCase);
+  await MetroService.makeNavigationHub(classReCase.snakeCase, navigationHub,
       forceCreate: hasForceFlag ?? false);
 }
 
@@ -420,17 +445,16 @@ _makeApiService(List<String> arguments) async {
   if (argResults.options.contains(postmanCollectionOption) &&
       argResults[postmanCollectionOption]) {
     // find all files in a directory
-    final directoryPostmanCollections =
-        Directory("public/assets/postman/collections");
+    final directoryPostmanCollections = Directory("public/postman/collections");
     if (!(await directoryPostmanCollections.exists())) {
       MetroConsole.writeInBlack(
-          "Your project is missing a 'public/assets/postman/collections' directory");
+          "Your project is missing a 'public/postman/collections' directory");
       exit(1);
     }
     List<FileSystemEntity> filesCollections =
         directoryPostmanCollections.listSync(recursive: false).toList();
     List<String> fileCollectionsNames = [];
-    filesCollections.forEach((element) {
+    for (var element in filesCollections) {
       if (element.path.contains(".json")) {
         if (Platform.isWindows) {
           fileCollectionsNames
@@ -439,25 +463,25 @@ _makeApiService(List<String> arguments) async {
           fileCollectionsNames.add(element.path.split("/").last);
         }
       }
-    });
+    }
 
     if (fileCollectionsNames.isEmpty) {
       MetroConsole.writeInBlack(
-          "Your project is missing Postman collections inside the 'public/assets/postman/collections' directory");
+          "Your project is missing Postman collections inside the 'public/postman/collections' directory");
       exit(1);
     }
 
     final directoryPostmanEnvironment =
-        Directory("public/assets/postman/environments");
+        Directory("public/postman/environments");
     if (!(await directoryPostmanEnvironment.exists())) {
       MetroConsole.writeInBlack(
-          "Your project is missing a 'public/assets/postman/environments' directory");
+          "Your project is missing a 'public/postman/environments' directory");
       exit(1);
     }
     List<FileSystemEntity> filesEnvironment =
         directoryPostmanEnvironment.listSync(recursive: false).toList();
     List<String> fileEnvironmentNames = [];
-    filesEnvironment.forEach((element) {
+    for (var element in filesEnvironment) {
       if (element.path.contains(".json")) {
         if (Platform.isWindows) {
           fileEnvironmentNames
@@ -466,7 +490,7 @@ _makeApiService(List<String> arguments) async {
           fileEnvironmentNames.add(element.path.split("/").last);
         }
       }
-    });
+    }
 
     final dialogQuestions = CliDialog(listQuestions: [
       [
@@ -489,11 +513,11 @@ _makeApiService(List<String> arguments) async {
     final dynamic environmentName = dialogQuestions['environment_name'];
 
     String? assetName = collectionName;
-    File file = File("public/assets/postman/collections/$assetName");
+    File file = File("public/postman/collections/$assetName");
     if ((await file.exists()) == false) {
       MetroConsole.writeInRed("Cannot locate \"$assetName\"");
       MetroConsole.writeInBlack(
-          "Add \"$assetName\" to your \"/public/assets/postman/collections\" directory.");
+          "Add \"$assetName\" to your \"/public/postman/collections\" directory.");
       exit(0);
     }
     String fileJson = await file.readAsString();
@@ -501,11 +525,10 @@ _makeApiService(List<String> arguments) async {
 
     Map<String, dynamic> postmanGlobalVars = {};
     if (environmentName != "None") {
-      File filePostman =
-          File("public/assets/postman/environments/$environmentName");
+      File filePostman = File("public/postman/environments/$environmentName");
       if ((await filePostman.exists()) == false) {
         MetroConsole.writeInBlack(
-            "File doesn't exist 'public/assets/postman/environments/$environmentName', please add your environment file from Postman.");
+            "File doesn't exist 'public/postman/environments/$environmentName', please add your environment file from Postman.");
         exit(1);
       }
       String jsonFilePostman = await filePostman.readAsString();
@@ -514,9 +537,9 @@ _makeApiService(List<String> arguments) async {
       List<dynamic> postmanEnvironmentValues =
           jsonDecodedPostmanEnvironment['values'];
       Map<String, dynamic> newObj = {};
-      postmanEnvironmentValues.forEach((value) {
+      for (var value in postmanEnvironmentValues) {
         newObj[value['key']] = value['value'];
-      });
+      }
 
       postmanGlobalVars = newObj;
     }
@@ -588,7 +611,7 @@ _makePostmanApiService(
       }
 
       // create a directory
-      String directory = 'lib/app/networking/' + pathName;
+      String directory = 'lib/app/networking/$pathName';
       await MetroService.makeDirectory(directory);
 
       // add back to loop
@@ -646,18 +669,18 @@ _makePostmanApiService(
           if (urlData.containsKey('query')) {
             List<Map<String, dynamic>>? queryData =
                 List<Map<String, dynamic>>.from(urlData['query']);
-            queryData.forEach((element) {
+            for (var element in queryData) {
               String key = element['key'];
               queryParams[key.camelCase] = element['value'];
-            });
+            }
           }
           if (urlData.containsKey('variable')) {
             List<Map<String, dynamic>>? queryData =
                 List<Map<String, dynamic>>.from(urlData['variable']);
-            queryData.forEach((element) {
+            for (var element in queryData) {
               String key = element['key'];
               pathParams[key.camelCase] = element['value'];
-            });
+            }
           }
         }
       }
@@ -685,11 +708,10 @@ _makePostmanApiService(
                   dynamic jsonRaw = jsonDecode(_replacePostmanStringVars(
                       postmanGlobalVars, body["raw"]));
                   if (jsonRaw is Map<String, dynamic>) {
-                    Map<String, dynamic>.from(jsonRaw)
-                        .entries
-                        .forEach((element) {
+                    for (var element
+                        in Map<String, dynamic>.from(jsonRaw).entries) {
                       dataParams[element.key] = element.value;
-                    });
+                    }
                   }
                 }
                 break;
@@ -734,7 +756,7 @@ _makePostmanApiService(
         dynamic rsp = _NyJson.tryDecode(responseBody);
         if (rsp != null) {
           // call generate to generate code
-          if (jsonResponseBody is List && jsonResponseBody.length > 0) {
+          if (jsonResponseBody is List && jsonResponseBody.isNotEmpty) {
             code = generator.generate(jsonEncode(jsonResponseBody[0]));
             isList = true;
           } else {
@@ -773,7 +795,7 @@ _makePostmanApiService(
           method: method,
           path: "/$cleanPath",
           urlFullPath: cleanUrlRaw,
-          model: (modelName != null ? modelName.pascalCase : null),
+          model: modelName?.pascalCase,
           isList: (isList ?? false),
           queryParams: queryParams,
           dataParams: dataParams,
@@ -997,7 +1019,7 @@ _makeModel(List<String> arguments) async {
   String modelName = projectFile.name.pascalCase;
   String stubModel = "";
   if (hasJsonFlag) {
-    final fileName = 'nylo-model.json';
+    const fileName = 'nylo-model.json';
 
     String? consoleMessage;
     if (Platform.isMacOS || Platform.isLinux) {
@@ -1037,9 +1059,8 @@ _makeModel(List<String> arguments) async {
     stubModel = generator.generate(modelData);
   } else {
     stubModel = modelStub(
-        modelName: modelName.snakeCase
-            .replaceAll(RegExp(r'(_?model)'), "")
-            .pascalCase);
+        modelName:
+            ReCase(modelName.snakeCase.replaceAll(RegExp(r'(_?model)'), "")));
   }
   await _createNyloModel(projectFile.name,
       stubModel: stubModel,
@@ -1047,7 +1068,7 @@ _makeModel(List<String> arguments) async {
       creationPath: projectFile.creationPath);
   if (hasJsonFlag) {
     String creationPath = (projectFile.creationPath != null
-        ? projectFile.creationPath! + "/"
+        ? "${projectFile.creationPath!}/"
         : "");
     await MetroService.runProcess(
         "dart format lib/app/models/$creationPath${projectFile.name.snakeCase}.dart");

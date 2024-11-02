@@ -20,61 +20,57 @@ ThemeData ${rc.camelCase}Theme(ColorStyles color) {
 
   return ThemeData(
     useMaterial3: true,
-    primaryColor: color.primaryContent,
+    primaryColor: color.content,
     primaryColorLight: color.primaryAccent,
-    focusColor: color.primaryContent,
+    focusColor: color.content,
     scaffoldBackgroundColor: color.background,
     hintColor: color.primaryAccent,
+    dividerTheme: DividerThemeData(color: Colors.grey[100]),
     appBarTheme: AppBarTheme(
+      surfaceTintColor: Colors.transparent,
       backgroundColor: color.appBarBackground,
-      titleTextStyle: ${rc.camelCase}Theme.titleLarge!
-          .copyWith(color: color.appBarPrimaryContent),
+      titleTextStyle:
+          ${rc.camelCase}Theme.titleLarge!.copyWith(color: color.appBarPrimaryContent),
       iconTheme: IconThemeData(color: color.appBarPrimaryContent),
       elevation: 1.0,
       systemOverlayStyle: SystemUiOverlayStyle.dark,
     ),
     buttonTheme: ButtonThemeData(
-      buttonColor: color.buttonPrimaryContent,
+      buttonColor: color.buttonContent,
       colorScheme: ColorScheme.light(primary: color.buttonBackground),
     ),
     textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(foregroundColor: color.primaryContent),
+      style: TextButton.styleFrom(foregroundColor: color.content),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: TextButton.styleFrom(
-          foregroundColor: color.buttonPrimaryContent,
+          foregroundColor: color.buttonContent,
           backgroundColor: color.buttonBackground),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: color.bottomTabBarBackground,
       unselectedIconTheme:
           IconThemeData(color: color.bottomTabBarIconUnselected),
-      selectedIconTheme:
-          IconThemeData(color: color.bottomTabBarIconSelected),
-      unselectedLabelStyle:
-          TextStyle(color: color.bottomTabBarLabelUnselected),
-      selectedLabelStyle:
-          TextStyle(color: color.bottomTabBarLabelSelected),
+      selectedIconTheme: IconThemeData(color: color.bottomTabBarIconSelected),
+      unselectedLabelStyle: TextStyle(color: color.bottomTabBarLabelUnselected),
+      selectedLabelStyle: TextStyle(color: color.bottomTabBarLabelSelected),
       selectedItemColor: color.bottomTabBarLabelSelected,
     ),
     textTheme: ${rc.camelCase}Theme,
     colorScheme: ColorScheme.light(
-      background: color.background
+        surface: color.background,
+        onSecondary: Colors.white,
+        primary: color.primaryAccent,
     ),
   );
 }
 
-/*
-|--------------------------------------------------------------------------
-| ${rc.titleCase} Text Theme
-|--------------------------------------------------------------------------
-*/
+/* ${rc.titleCase} Text Theme
+|-------------------------------------------------------------------------- */
 
-TextTheme _textTheme(ColorStyles color) {
-  Color primaryContent = color.primaryContent;
-  TextTheme textTheme = const TextTheme().apply(displayColor: primaryContent);
+TextTheme _textTheme(ColorStyles colors) {
+  TextTheme textTheme = const TextTheme().apply(displayColor: colors.content);
   return textTheme.copyWith(
-      labelLarge: TextStyle(color: primaryContent.withOpacity(0.8))
-  );
+      labelLarge: TextStyle(color: colors.content.withOpacity(0.8)));
 }
 ''';

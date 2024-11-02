@@ -6,9 +6,9 @@ import 'package:nylo_framework/nylo_framework.dart';
 
 /* ${className.pascalCase} Form
 |--------------------------------------------------------------------------
-| Usage: https://nylo.dev/docs/5.20.0/forms#how-it-works
-| Casts: https://nylo.dev/docs/5.20.0/forms#form-casts
-| Validation Rules: https://nylo.dev/docs/5.20.0/validation#validation-rules
+| Usage: https://nylo.dev/docs/6.x/forms#how-it-works
+| Casts: https://nylo.dev/docs/6.x/forms#form-casts
+| Validation Rules: https://nylo.dev/docs/6.x/validation#validation-rules
 |-------------------------------------------------------------------------- */
 
 class ${className.pascalCase}Form extends NyFormData {
@@ -17,31 +17,26 @@ class ${className.pascalCase}Form extends NyFormData {
 
   @override
   fields() => [
-     Field("Name",
-        value: "Customize your form ⚡️",
-        cast: FormCast.text(),
-        dummyData: null,
+     Field.text("Name",
         style: "compact"
     ),
     [
-      Field("Price",
-        cast: FormCast.currency("usd"),
+      Field.currency("Price",
+        currency: "usd",
         dummyData: "19.99",
         style: "compact",
       ),
-      Field("Favourite Color",
-        cast: FormCast.picker(options: [
+      Field.picker("Favourite Color",
+        options: [
           "Red",
           "Blue",
           "Green"
-        ]),
-        validate: FormValidator.rule("contains:Red,Blue,Green"),
-        dummyData: "Blue",
+        ],
+        validate: FormValidator.contains(["Red","Blue","Green"]),
         style: "compact",
       ),
     ],
-    Field("Bio",
-        cast: FormCast.textArea(),
+    Field.textArea("Bio",
         style: "compact"
     ),
   ];

@@ -8,7 +8,7 @@ String postmanApiServiceStub(ReCase rc,
         required String baseUrl}) =>
     '''import 'package:flutter/material.dart';
 import 'package:nylo_framework/nylo_framework.dart';
-import '/config/decoders.dart';${imports != "" ? '\n' + imports + '' : ''}
+import '/config/decoders.dart';${imports != "" ? '\n$imports' : ''}
 
 class ${rc.pascalCase}ApiService extends NyApiService {
   ${rc.pascalCase}ApiService({BuildContext? buildContext}) : super(buildContext, decoders: modelDecoders);

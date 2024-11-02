@@ -9,8 +9,8 @@ class ClassType {
     var find = values.firstWhereOrNull((element) => element.value == typeName);
 
     if (find == null) {
-      print('$typeName');
-      throw '$typeName';
+      print(typeName);
+      throw typeName;
     }
     return find;
   }
@@ -139,6 +139,6 @@ class ClassType {
 
   @override
   String toString() {
-    return '$value';
+    return value;
   }
 }

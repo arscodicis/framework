@@ -27,7 +27,7 @@ class ListChooser {
 
   /// Named constructor mostly for unit testing.
   /// For context and an example see [CLI_Dialog], `README.md` and the `test/` folder.
-  ListChooser.std(this._std_input, this._std_output, this.items,
+  ListChooser.std(this._stdInput, this._stdOutput, this.items,
       {this.navigationMode = false}) {
     _checkItems();
     if (stdin.hasTerminal) {
@@ -43,16 +43,16 @@ class ListChooser {
 
     _renderList(0, initial: true);
 
-    while ((input = _userInput()) != ENTER) {
+    while ((input = _userInput()) != enter) {
       if (input! < 0) {
         _resetStdin();
         return ':${-input}';
       }
-      if (input == ARROW_UP) {
+      if (input == arrowUp) {
         if (index > 0) {
           index--;
         }
-      } else if (input == ARROW_DOWN) {
+      } else if (input == arrowDown) {
         if (index < items!.length - 1) {
           index++;
         }
@@ -65,8 +65,8 @@ class ListChooser {
 
   // END OF PUBLIC API
 
-  var _std_input = StdinService();
-  var _std_output = StdoutService();
+  var _stdInput = StdinService();
+  var _stdOutput = StdoutService();
 
   void _checkItems() {
     if (items == null) {
@@ -75,15 +75,15 @@ class ListChooser {
   }
 
   int? _checkNavigation() {
-    final input = _std_input.readByteSync();
+    final input = _stdInput.readByteSync();
     if (navigationMode) {
       if (input == 58) {
         // 58 = :
-        _std_output.write(':');
+        _stdOutput.write(':');
         final inputLine =
-            _std_input.readLineSync(encoding: Encoding.getByName('utf-8'))!;
+            _stdInput.readLineSync(encoding: Encoding.getByName('utf-8'))!;
         final lineNumber = int.parse(inputLine.trim());
-        _std_output.writeln('$lineNumber');
+        _stdOutput.writeln('$lineNumber');
         return -lineNumber; // make the result negative so it can be told apart from normal key codes
       } else {
         return input;
@@ -95,7 +95,7 @@ class ListChooser {
 
   void _deletePreviousList() {
     for (var i = 0; i < items!.length; i++) {
-      _std_output.write(XTerm.moveUp(1) + XTerm.blankRemaining());
+      _stdOutput.write(XTerm.moveUp(1) + XTerm.blankRemaining());
     }
   }
 
@@ -105,11 +105,11 @@ class ListChooser {
     }
     for (var i = 0; i < items!.length; i++) {
       if (i == index) {
-        _std_output
-            .writeln(XTerm.rightIndicator() + ' ' + XTerm.teal(items![i]));
+        _stdOutput
+            .writeln('${XTerm.rightIndicator()} ${XTerm.teal(items![i])}');
         continue;
       }
-      _std_output.writeln('  ' + items![i]);
+      _stdOutput.writeln('  ${items![i]}');
     }
   }
 
@@ -131,25 +131,25 @@ class ListChooser {
 
     if (Platform.isWindows) {
       if (navigationResult == Keys.enter) {
-        return ENTER;
+        return enter;
       }
       if (navigationResult == Keys.arrowUp[0]) {
-        return ARROW_UP;
+        return arrowUp;
       }
       if (navigationResult == Keys.arrowDown[0]) {
-        return ARROW_DOWN;
+        return arrowDown;
       } else {
         return navigationResult;
       }
     } else {
-      if (navigationResult == ENTER) {
-        return ENTER;
+      if (navigationResult == enter) {
+        return enter;
       }
-      final anotherByte = _std_input.readByteSync();
-      if (anotherByte == ENTER) {
-        return ENTER;
+      final anotherByte = _stdInput.readByteSync();
+      if (anotherByte == enter) {
+        return enter;
       }
-      final input = _std_input.readByteSync();
+      final input = _stdInput.readByteSync();
       return input;
     }
   }

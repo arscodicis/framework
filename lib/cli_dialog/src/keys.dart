@@ -1,7 +1,7 @@
-const ARROW_UP = 65;
-const ARROW_DOWN = 66;
-const ENTER = 10;
+const arrowUp = 65;
+const arrowDown = 66;
+const enter = 10;
 
-const WIN_UP = 119;
-const WIN_DOWN = 115;
-const WIN_ENTER = 13;
+const winUp = 119;
+const winDown = 115;
+const winEnter = 13;
