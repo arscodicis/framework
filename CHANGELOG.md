@@ -1,3 +1,7 @@
+## [6.1.0] - 2024-11-04
+
+* Update pubspec.yaml
+
 ## [6.0.0] - 2024-11-02
 
 * New version of Nylo - read more about the changes [here](https://nylo.dev/)
