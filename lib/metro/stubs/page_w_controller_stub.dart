@@ -9,9 +9,9 @@ import 'package:nylo_framework/nylo_framework.dart';
 import '/app/controllers/${creationPath != null ? "$creationPath/${className.snakeCase}" : className.snakeCase}_controller.dart';
 
 class ${className.pascalCase}Page extends NyStatefulWidget<${className.pascalCase}Controller> {
-  static const path = '/${className.paramCase}';
+  static RouteView path = ("/${className.paramCase}", (_) => ${className.pascalCase}Page());
 
-  ${className.pascalCase}Page({super.key}) : super(path, child: () => _${className.pascalCase}PageState());
+  ${className.pascalCase}Page() : super(child: () => _${className.pascalCase}PageState());
 }
 
 class _${className.pascalCase}PageState extends NyState<${className.pascalCase}Page> {
@@ -19,18 +19,12 @@ class _${className.pascalCase}PageState extends NyState<${className.pascalCase}P
   /// [${className.pascalCase}Controller] controller
   ${className.pascalCase}Controller get controller => widget.controller;
 
-  @override
-  init() async {
+ @override
+  get init => () {
 
-  }
+  };
   
-  /// Use boot if you need to load data before the view is rendered.
-  // @override
-  // boot() async {
-  //
-  // }
-
-  @override
+ @override
   Widget view(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
