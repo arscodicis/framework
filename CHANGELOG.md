@@ -1,3 +1,8 @@
+## [6.1.1] - 2024-11-08
+
+* Update page_w_controller_stub
+* Contribution from [jitendravn](https://github.com/jitendravn)
+ 
 ## [6.1.0] - 2024-11-04
 
 * Update pubspec.yaml
