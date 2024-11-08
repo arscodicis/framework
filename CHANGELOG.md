@@ -1,7 +1,11 @@
+## [6.1.2] - 2024-11-08
+
+* Update pubspec.yaml
+
 ## [6.1.1] - 2024-11-08
 
 * Update page_w_controller_stub
-* Contribution from [jitendravn](https://github.com/jitendravn)
+* Contribution from [jitendravn](https://github.com/jitendravn) PR [#40](https://github.com/nylo-core/framework/pull/40)
  
 ## [6.1.0] - 2024-11-04
 
