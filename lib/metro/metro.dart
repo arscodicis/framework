@@ -10,7 +10,6 @@ import 'package:nylo_framework/metro/stubs/config_stub.dart';
 import 'package:nylo_framework/metro/stubs/form_stub.dart';
 import 'package:nylo_framework/metro/stubs/interceptor_stub.dart';
 import 'package:nylo_framework/metro/stubs/navigation_hub_stub.dart';
-import 'package:nylo_framework/metro/stubs/page_bottom_nav_stub.dart';
 import 'package:nylo_framework/metro/stubs/route_guard_stub.dart';
 import 'package:nylo_framework/metro/stubs/widget_state_managed_stub.dart';
 import 'package:nylo_support/metro/models/metro_project_file.dart';
@@ -1152,40 +1151,6 @@ _makePage(List<String> arguments) async {
   if (argResults.arguments.first.trim() == "") {
     MetroConsole.writeInRed('You cannot create a page with an empty string');
     exit(1);
-  }
-
-  if (argResults[bottomNavFlag]) {
-    final dialogQuestions = CliDialog(listQuestions: [
-      [
-        {
-          'question': 'How many tabs will the page have?',
-          'options': ["1", "2", "3", "4", "5"]
-        },
-        'bottom_tabs'
-      ],
-    ]).ask();
-
-    int bottomTabs = int.parse(dialogQuestions['bottom_tabs']);
-
-    String stubBottomNavPage = pageBottomNavStub(
-        className: argResults.arguments.first.snakeCase
-            .replaceAll(RegExp(r'(_?page)'), ""),
-        tabCount: bottomTabs);
-
-    MetroProjectFile projectFile = MetroService.createMetroProjectFile(
-        argResults.arguments.first,
-        prefix: RegExp(r'(_?page)'));
-
-    await MetroService.makePage(
-      projectFile.name,
-      stubBottomNavPage,
-      forceCreate: hasForceFlag ?? false,
-      addToRoute: true,
-      isInitialPage: initialPage,
-      isAuthPage: authPage,
-      creationPath: projectFile.creationPath,
-    );
-    return;
   }
 
   String firstArg = argResults.arguments.first;

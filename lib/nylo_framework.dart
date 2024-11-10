@@ -17,7 +17,7 @@ export 'package:nylo_support/helpers/ny_app_usage.dart';
 export 'package:nylo_support/helpers/ny_cache.dart';
 export 'package:nylo_support/helpers/ny_logger.dart';
 export 'package:nylo_support/helpers/ny_scheduler.dart';
-export 'package:nylo_support/helpers/session.dart';
+export 'package:nylo_support/helpers/ny_session.dart';
 export 'package:nylo_support/helpers/state_action.dart';
 export 'package:nylo_support/helpers/backpack.dart';
 export 'package:nylo_support/helpers/auth.dart';
@@ -64,4 +64,4 @@ export 'package:date_field/date_field.dart';
 export 'package:dio/dio.dart';
 
 /// Nylo version
-const String nyloVersion = 'v6.1.2';
+const String nyloVersion = 'v6.2.0';
