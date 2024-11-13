@@ -1,3 +1,7 @@
+## [6.2.1] - 2024-11-13
+
+* Update pubspec.yaml
+
 ## [6.2.0] - 2024-11-10
 
 * Remove page_bottom_nav_stub

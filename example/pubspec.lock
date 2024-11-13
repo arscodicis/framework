@@ -202,10 +202,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_local_notifications
-      sha256: "725145682706fb0e5a30f93e5cb64f3df7ed7743de749bd555b22bf75ee718c0"
+      sha256: ef41ae901e7529e52934feba19ed82827b11baa67336829564aeab3129460610
       url: "https://pub.dev"
     source: hosted
-    version: "18.0.0"
+    version: "18.0.1"
   flutter_local_notifications_linux:
     dependency: transitive
     description:
@@ -411,15 +411,15 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "6.2.0"
+    version: "6.2.1"
   nylo_support:
     dependency: transitive
     description:
       name: nylo_support
-      sha256: ba739856ac9ecc98f940ff60d50b0efff55a649dc1be72b95e26a79e63994ead
+      sha256: ff987acd05dbb60c246b704625e5e5da995b5d3125eba12ccdcb6328716f6d71
       url: "https://pub.dev"
     source: hosted
-    version: "6.2.0"
+    version: "6.3.0"
   path:
     dependency: transitive
     description:
