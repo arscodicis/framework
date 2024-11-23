@@ -141,10 +141,10 @@ packages:
     dependency: transitive
     description:
       name: equatable
-      sha256: c2b87cb7756efdf69892005af546c56c0b5037f54d2a88269b4f347a505e3ca2
+      sha256: "567c64b3cb4cf82397aac55f4f0cbd3ca20d77c6c03bedbc4ceaddc08904aef7"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.5"
+    version: "2.0.7"
   error_stack:
     dependency: transitive
     description:
@@ -321,10 +321,10 @@ packages:
     dependency: transitive
     description:
       name: get_time_ago
-      sha256: "71296a1931e844efc7fced1e943db822dc8ae3c8e5cbf6acc4db1d6533b556a1"
+      sha256: "0f50a87080a720f5491266a3f7c79109f95943decd10b66c84b5aef802f1d959"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.0"
+    version: "2.1.1"
   http_parser:
     dependency: transitive
     description:
@@ -411,15 +411,15 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "6.2.2"
+    version: "6.2.3"
   nylo_support:
     dependency: transitive
     description:
       name: nylo_support
-      sha256: "11868391689a8d380bc29f384cec2999bd2bf6ee6b2cb9be34bbee3884b1d052"
+      sha256: "253edc164e5465772972c93f0f2e219a46699bf950ad434ec934486da7685273"
       url: "https://pub.dev"
     source: hosted
-    version: "6.4.0"
+    version: "6.5.0"
   path:
     dependency: transitive
     description:

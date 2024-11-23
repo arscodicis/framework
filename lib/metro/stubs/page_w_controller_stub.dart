@@ -11,7 +11,7 @@ import '/app/controllers/${creationPath != null ? "$creationPath/${className.sna
 class ${className.pascalCase}Page extends NyStatefulWidget<${className.pascalCase}Controller> {
   static RouteView path = ("/${className.paramCase}", (_) => ${className.pascalCase}Page());
 
-  ${className.pascalCase}Page() : super(child: () => _${className.pascalCase}PageState());
+  ${className.pascalCase}Page({super.key}) : super(child: () => _${className.pascalCase}PageState());
 }
 
 class _${className.pascalCase}PageState extends NyState<${className.pascalCase}Page> {
