@@ -1,3 +1,7 @@
+## [6.2.4] - 2024-11-25
+
+* Update pubspec.yaml
+
 ## [6.2.3] - 2024-11-23
 
 * Update stub constructors to include `{super.key}`
